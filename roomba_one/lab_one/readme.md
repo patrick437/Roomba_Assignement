@@ -70,7 +70,7 @@ In this lab, we will use a docker container and Xserver. We will also use volume
      ```
     - If successful, you should see a folder structure like this:
 
-![alt text](image-1.png)
+![alt text](images/image-1.png)
 
 4. **Define the Robot Model**
 
@@ -91,7 +91,7 @@ In this lab, we will use a docker container and Xserver. We will also use volume
     - As part of the exercise, you will be required to define the position of the cylinder and castor wheel. Below is a photo of a real zoomba. Use this as a reference.
         - Hint: refer to robot_core.xacro in https://github.com/joshnewans/articubot_one/tree/main/description as a guide
 
-![alt text](image-2.png)
+![alt text](images/image-2.png)
 
 5. **Create the Simulation Environment**
 
@@ -114,7 +114,7 @@ In this lab, we will use a docker container and Xserver. We will also use volume
    ros2 launch roomba_one roomba_one.launch.py world:=src/lab_one/worlds/roomba_world.world
    ```
    - If everything goes according to plan, you should see something like this:
-   ![alt text](image-3.png)
+   ![alt text](images/image-3.png)
 
 ### Next steps
 Once we successfully visualize our robot in gazebo, we will use ros2_control to move our robot in its environment
