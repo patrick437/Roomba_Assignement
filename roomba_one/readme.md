@@ -45,7 +45,7 @@ Once the container is running, you can start developing your ROS2 applications w
 ## Instructions for lab 1
 1. **Build the container**
 ```bash
-docker build --no-cache -f Dockerfile_roomba -t ros2_roomba .
+docker build -f Dockerfile_roomba -t ros2_roomba .
 ```
 
 2. **running lab_one container**
