@@ -65,6 +65,7 @@ Note: typically, you would have to create an `src`folder and add your source fil
 3. **Create a ROS2 Package**   
     - Create a new ROS2 package (if not already done). You may name it `roomba_one`:  
      ```bash
+     cd home/ros2_ws/src
      ros2 pkg create --build-type ament_cmake lab_one
      ```
     - If successful, you should see a folder structure like this:
@@ -112,7 +113,7 @@ Note: typically, you would have to create an `src`folder and add your source fil
    cd /home/ros2_ws/
    ros2 launch roomba_one launch_sim.launch.py world:=src/worlds/roomba_world.world
    ```
-   - If everything goes according to plan, you should see something like this:
+   - If everything goes according to plan, you should see something like this (without the wheels):
    ![alt text](images/image-3.png)
 
 ### Next steps
