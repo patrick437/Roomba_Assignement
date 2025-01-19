@@ -50,10 +50,7 @@ docker build -f Dockerfile_roomba -t ros2_roomba .
 
 2. **running lab_one container**
 ```bash
-docker build -f Dockerfile_roomba -t ros2_roomba .
-docker run -it --rm --name ros2_roomba_container \ 
-    -e DISPLAY=host.docker.internal:0.0 \
-    -v lab_one:/home/ros2_ws ros2_roomba
+docker run -it --rm --name ros2_roomba_container -e DISPLAY=host.docker.internal:0.0 -v .\lab_one\:/home/ros2_ws ros2_roomba
 ```
 
 3. **Next steps**
