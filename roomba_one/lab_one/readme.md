@@ -60,7 +60,7 @@ In this lab, we will use a docker container and Xserver. We will also use volume
      ```
     - Copy the contents of the template into the src folder
     
-![alt text](image.png)
+![alt text](images/image.png)
 
 3. **Create a ROS2 Package**   
     - Create a new ROS2 package (if not already done). You may name it `roomba_one`:  
