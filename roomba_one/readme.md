@@ -36,26 +36,7 @@ The Dockerfile removes cached package lists to minimize the final image size, fo
 - To persist any data or changes, you may want to mount a volume between your host machine and the Docker container.
 
 
-## Building and using this container
 
-1. **Build the Docker image:**
-    ```bash
-    docker build -t ros2_humble_gui .
-    ```
-
-2. **Run the Docker container:**
-    The following is a general example of how to run this Docker container
-    ### Linux:
-    ```bash
-    docker run -it --rm --name ros2_humble_gui_container -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix ros2_humble_gui
-    ```
-    ### windows:
-    Note: ensure you have Xlaunch installed and running, otherwise gui won't work
-    ```bash
-    docker run -it --rm --name ros2_humble_gui_container -e DISPLAY=host.docker.internal:0.0 ros2_humble_gui -v my_volume:/path/in/container my_image:latest
-    ```
-    -e defines the display settings. We need this for X11 support
-    -v specifies the shared volume we'll use
 
 ## Usage
 
@@ -77,6 +58,27 @@ docker run -it --rm --name ros2_roomba_container \
 
 3. **Next steps**
 - Follow the instructions in the lab_one readme.md file
+
+## Generic instructions for building and using this container
+
+1. **Build the Docker image:**
+    ```bash
+    docker build -t ros2_humble_gui .
+    ```
+
+2. **Run the Docker container:**
+    The following is a general example of how to run this Docker container
+    ### Linux:
+    ```bash
+    docker run -it --rm --name ros2_humble_gui_container -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix ros2_humble_gui
+    ```
+    ### windows:
+    Note: ensure you have Xlaunch installed and running, otherwise gui won't work
+    ```bash
+    docker run -it --rm --name ros2_humble_gui_container -e DISPLAY=host.docker.internal:0.0 ros2_humble_gui -v my_volume:/path/in/container my_image:latest
+    ```
+    -e defines the display settings. We need this for X11 support
+    -v specifies the shared volume we'll use
 
 ## Contributing
 
