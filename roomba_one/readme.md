@@ -36,7 +36,27 @@ The Dockerfile removes cached package lists to minimize the final image size, fo
 - To persist any data or changes, you may want to mount a volume between your host machine and the Docker container.
 
 
-## Building and using this container
+
+
+## Usage
+
+Once the container is running, you can start developing your ROS2 applications with GUI support. The container includes all the necessary tools and libraries for ROS2 development.
+
+## Instructions for lab 1
+1. **Build the container**
+```bash
+docker build -f Dockerfile_roomba -t ros2_roomba .
+```
+
+2. **running lab_one container**
+```bash
+docker run -it --rm --name ros2_roomba_container -e DISPLAY=host.docker.internal:0.0 -v .\lab_one\:/home/ros2_ws ros2_roomba
+```
+
+3. **Next steps**
+- Follow the instructions in the lab_one readme.md file
+
+## Generic instructions for building and using this container
 
 1. **Build the Docker image:**
     ```bash
@@ -56,27 +76,6 @@ The Dockerfile removes cached package lists to minimize the final image size, fo
     ```
     -e defines the display settings. We need this for X11 support
     -v specifies the shared volume we'll use
-
-## Usage
-
-Once the container is running, you can start developing your ROS2 applications with GUI support. The container includes all the necessary tools and libraries for ROS2 development.
-
-## Instructions for lab 1
-1. **Build the container**
-```bash
-docker build --no-cache -f Dockerfile_roomba -t ros2_roomba .
-```
-
-2. **running lab_one container**
-```bash
-docker build -f Dockerfile_roomba -t ros2_roomba .
-docker run -it --rm --name ros2_roomba_container \ 
-    -e DISPLAY=host.docker.internal:0.0 \
-    -v lab_one:/home/ros2_ws ros2_roomba
-```
-
-3. **Next steps**
-- Follow the instructions in the lab_one readme.md file
 
 ## Contributing
 
