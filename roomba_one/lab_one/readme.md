@@ -66,7 +66,7 @@ Note: typically, you would have to create an `src`folder and add your source fil
     - Create a new ROS2 package (if not already done). You may name it `roomba_one`:  
      ```bash
      cd home/ros2_ws/src
-     ros2 pkg create --build-type ament_cmake lab_one
+     ros2 pkg create --build-type ament_cmake roomba_one
      ```
     - If successful, you should see a folder structure like this:
 
