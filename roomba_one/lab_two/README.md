@@ -4,9 +4,10 @@
 
 #### Prerequisites
 
-- ROS 2 Foxy or later installed
+- ROS 2 Humble installed
 - Gazebo simulator installed
 - Understanding of URDF (Unified Robot Description Format) and basic ROS 2 concepts
+- Lab one completed
 
 #### Instructions
 
@@ -14,134 +15,25 @@
 
 ### Part 1: Spawning a Simple Robot in Gazebo
 
-1. **Create a New ROS 2 Package:**
+1. **Modify robot_core.xacro:**
 
-   Open a terminal and create a new package for your robot.
+   Modify the robot_core.xacro and add the joint and link descriptions for the left, right and castor wheels. Use the dimensions provided in the lab_one 
+   description (https://github.com/CARinternal/EE5108-Digital-Twins-for-Robotics/tree/main/roomba_one/lab_one)
 
+
+2. **Launch the Robot in Gazebo:**
+
+   Rebuild your ROS2 package, and source:
    ```bash
-   ros2 pkg create --build-type ament_cmake my_robot
-   cd my_robot
-   mkdir urdf launch config
+   cd /home/ros2_ws
+   colcon build --symlink-install
+   # source your package
+   source install/setup.bash
    ```
-
-2. **Define the Robot URDF:**
-
-   Create a new URDF file for the robot.
-
+   Launch the simulation:
    ```bash
-   touch urdf/simple_robot.urdf
-   ```
-
-   Open `simple_robot.urdf` using a text editor and add the following content to define a robot base, two cylinder wheels, and a spherical castor wheel:
-
-   ```xml
-   <?xml version="1.0"?>
-   <robot name="simple_robot">
-
-     <!-- Base Link -->
-     <link name="base_link">
-       <visual>
-         <geometry>
-           <box size="0.4 0.2 0.1"/>
-         </geometry>
-         <origin xyz="0 0 0.05"/>
-         <material name="blue">
-           <color rgba="0 0 1 1"/>
-         </material>
-       </visual>
-     </link>
-
-     <!-- Wheel Links -->
-     <link name="left_wheel">
-       <visual>
-         <geometry>
-           <cylinder radius="0.1" length="0.05"/>
-         </geometry>
-         <origin xyz="-0.15 0.1 0"/>
-         <material name="black">
-           <color rgba="0 0 0 1"/>
-         </material>
-       </visual>
-     </link>
-
-     <link name="right_wheel">
-       <visual>
-         <geometry>
-           <cylinder radius="0.1" length="0.05"/>
-         </geometry>
-         <origin xyz="0.15 0.1 0"/>
-         <material name="black"/>
-       </visual>
-     </link>
-
-     <!-- Spherical Castor -->
-     <link name="castor_wheel">
-       <visual>
-         <geometry>
-           <sphere radius="0.05"/>
-         </geometry>
-         <origin xyz="0 0 -0.05"/>
-         <material name="grey">
-           <color rgba="0.5 0.5 0.5 1"/>
-         </material>
-       </visual>
-     </link>
-
-     <!-- Joints -->
-     <joint name="left_wheel_joint" type="continuous">
-       <parent link="base_link"/>
-       <child link="left_wheel"/>
-       <origin xyz="-0.15 0.1 0"/>
-       <axis xyz="0 1 0"/>
-     </joint>
-
-     <joint name="right_wheel_joint" type="continuous">
-       <parent link="base_link"/>
-       <child link="right_wheel"/>
-       <origin xyz="0.15 0.1 0"/>
-       <axis xyz="0 1 0"/>
-     </joint>
-
-     <joint name="castor_joint" type="fixed">
-       <parent link="base_link"/>
-       <child link="castor_wheel"/>
-       <origin xyz="0 0 -0.05"/>
-     </joint>
-
-   </robot>
-   ```
-
-3. **Launch the Robot in Gazebo:**
-
-   Create a launch file to load the robot in Gazebo.
-
-   ```bash
-   touch launch/spawn_robot_launch.py
-   ```
-
-   Add the following content to the launch file:
-
-   ```python
-   from launch import LaunchDescription
-   from launch_ros.actions import Node
-
-   def generate_launch_description():
-       return LaunchDescription([
-           Node(
-               package='gazebo_ros',
-               executable='spawn_entity.py',
-               arguments=['-entity', 'simple_robot', '-file', 'urdf/simple_robot.urdf'],
-               output='screen'
-           ),
-       ])
-   ```
-
-4. **Run the Launch File:**
-
-   Execute the launch file to spawn your robot in Gazebo.
-
-   ```bash
-   ros2 launch my_robot spawn_robot_launch.py
+   cd /home/ros2_ws/
+   ros2 launch roomba_one launch_sim.launch.py world:=src/worlds/roomba_world.world
    ```
 
 ### Part 2: Setting Up Differential Drive Control
@@ -168,7 +60,16 @@
        pose_publish_rate: 50
    ```
 
-2. **Modify Launch File to Include `ros2_control`:**
+2. **Adding `ros2_control`:**
+
+   Add the following files to your project `config` folder:
+   - gaz_ros2_use_sim.yaml
+   - gazebo_params.yaml
+   - joystick.yaml
+   - my_controllers.yaml
+   - twist_mux.yaml
+  
+   You can find these files in the lab_two `config` folder in this repository
 
    Update the launch file to load and start the controller:
 
@@ -209,7 +110,7 @@
        ])
    ```
 
-3. **Launch the Robot with Controllers:**
+4. **Launch the Robot with Controllers:**
 
    Run the launch file to spawn the robot along with the controllers.
 
