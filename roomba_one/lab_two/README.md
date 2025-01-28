@@ -10,8 +10,9 @@
 - Lab one completed
 
 #### Instructions
-Before beginning the next sections, update your workspace with the config, description and launch files provided in this folder.
+
 ---
+Before beginning the next sections, update your workspace with the config, description and launch files provided in this folder.
 
 ### Part 1: Spawning a Simple Robot in Gazebo
 
