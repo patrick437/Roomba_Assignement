@@ -10,4 +10,3 @@ Add xacro files for each camera.
 Update robot.urdf.xacro
 Visualize sensor data in RViz and Gazebo
 
-## Add Nav2
