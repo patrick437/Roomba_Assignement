@@ -22,7 +22,8 @@ RUN apt-get update && apt-get install -y \
     ros-humble-gazebo-ros2-control \
     ros-humble-controller-manager \
     nano && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+    apt-get clean && rm -rf /var/lib/apt/lists/* \
+    apt-get install ros-humble-gazebo-tools
 
 # Entry point to ensure container remains running
 CMD ["bash"]

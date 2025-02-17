@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+  
+  <joint name="imu_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="imu_link" />
+  </joint>
+
+  <link name="imu_link">
+  </link>
+
+  <gazebo reference="imu_link">
+    <sensor name="imu" type="imu">
+      <always_on>1</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>imu</topic>
+      <enable_metrics>true</enable_metrics>
+      <gz_frame_id>imu_link</gz_frame_id>
+      
+      <imu>
+        <!-- Accelerometer noise parameters -->
+        <accel>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.05</stddev>
+            <bias_mean>0.0</bias_mean>
+            <bias_stddev>0.01</bias_stddev>
+          </noise>
+        </accel>
+
+        <!-- Gyroscope noise parameters -->
+        <gyro>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+            <bias_mean>0.0</bias_mean>
+            <bias_stddev>0.02</bias_stddev>
+          </noise>
+        </gyro>
+      </imu>
+
+      <plugin name="imu_controller" filename="libgazebo_ros_imu_sensor.so">
+        <frame_name>imu_link</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>

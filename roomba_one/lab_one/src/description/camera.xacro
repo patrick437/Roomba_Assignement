@@ -28,6 +28,7 @@
         <parent link="camera_link"/>
         <child link="camera_link_optical"/>
         <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+        <origin xyz="0 0 0" rpy="${-pi/2} ${pi/9} ${-pi/2}"/>
     </joint>
 
     <link name="camera_link_optical"></link>
@@ -42,7 +43,7 @@
             <visualize>true</visualize>
             <update_rate>10</update_rate>
             <camera>
-                <horizontal_fov>1.57</horizontal_fov> <!--90 degree fov-->
+                <horizontal_fov>2.0944</horizontal_fov> <!--90 degree fov-->
                 
                 <image>
                     <format>R8G8B8</format>
@@ -51,16 +52,21 @@
                 </image>
                 <clip>
                     <near>0.05</near>
-                    <far>8.0</far>
+                    <far>20.0</far>
                 </clip>
                 <distortion>
-                  <k1>-0.1</k1> <!-- Radial distortion coefficient -->
-                  <k2>0.12</k2>  <!-- Radial distortion coefficient -->
+                  <k1>0.2</k1> <!-- Radial distortion coefficient -->
+                  <k2>0.0</k2>  <!-- Radial distortion coefficient -->
                   <k3>0.0</k3>   <!-- Sometimes used for higher-order distortion -->
                   <p1>0.0</p1>   <!-- Tangential distortion coefficient -->
                   <p2>0.0</p2>   <!-- Tangential distortion coefficient -->
                   <center>0.5 0.5</center> <!-- Distortion center in normalized coordinates -->
                 </distortion>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.01</stddev>
+                </noise>
             </camera>
             <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
                 <frame_name>camera_link_optical</frame_name>
